@@ -1,7 +1,7 @@
 from ZODB import FileStorage, DB, persistentclass
 import persistent
 import transaction
-# persistent.mapping.PersistentMapping
+
 class Employee(persistent.Persistent):
     """An employee"""
 
@@ -15,12 +15,10 @@ db=DB(storage)
 connection=db.open()
 root=connection.root()
 
-# get the employees mapping, creating an empty mapping if
-# necessary
+# get the employees mapping, creating an empty mapping if necessary
 if "employees" not in root:
     root["employees"] = {}
 employees=root["employees"]
-
 
 def listEmployees():
     if len(employees.values())==0:
@@ -54,7 +52,6 @@ def addEmployee(name, manager_name=None):
     transaction.commit()
     print ("Employee %s added." % name)
     print
-
 
 if __name__=="__main__":
     while 1:
